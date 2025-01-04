@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>BA</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div>
+            <button id="compression" onclick="redirect(this.id)">Compression</button>
+            <button id="traction" onclick="redirect(this.id)">Traction</button>
+            <button id="flexion" onclick="redirect(this.id)">Flexion Simple</button>
+        </div>
+        <script>
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+            }
+        
+            const darkModeButton = document.createElement('button');
+            darkModeButton.innerHTML = '🌙'; 
+            darkModeButton.style.position = 'fixed';
+            darkModeButton.style.top = '20px'; 
+            darkModeButton.style.right = '20px';
+            darkModeButton.style.padding = '8px'; 
+            darkModeButton.style.fontSize = '1.2rem'; 
+            darkModeButton.style.backgroundColor = '#004d7a'; 
+            darkModeButton.style.color = '#fff'; 
+            darkModeButton.style.border = 'none';
+            darkModeButton.style.borderRadius = '50%';
+            darkModeButton.style.cursor = 'pointer';
+            darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+            darkModeButton.style.transition = 'background-color 0.3s';
+            darkModeButton.style.zIndex = '9999'; 
+            darkModeButton.style.width = '40px';  
+            darkModeButton.style.height = '40px'; 
+        
+            darkModeButton.addEventListener('mouseover', () => {
+                darkModeButton.style.backgroundColor = '#1e90ff';
+            });
+            darkModeButton.addEventListener('mouseout', () => {
+                darkModeButton.style.backgroundColor = '#004d7a';
+            });
+        
+            darkModeButton.addEventListener('click', toggleDarkMode);
+            document.body.appendChild(darkModeButton);
+        </script> 
+    </body>
+</html>
