@@ -1,3 +1,3 @@
 function redirect(id){
-    location.href = "/"+id+"/index.html"
+    location.href = "./"+id+"/index.html"
 }
