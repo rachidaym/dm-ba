@@ -19,6 +19,8 @@ let fc28 = new Variable("fc28", undefined, undefined,true, false, ["never"], und
 let fe = new Variable("fe", undefined, undefined,true, false, ["never"], undefined);
 let b = new Variable("b", undefined, undefined,true, false, ["never"], undefined);
 let h = new Variable("h", undefined, undefined,true, false, ["never"], undefined);
+let d = new Variable("d", undefined, undefined,true, false, ["never"], undefined);
+let d1 = new Variable("d1", undefined, undefined,true, false, ["never"], undefined);
 let ees = new Variable("ees", undefined, undefined,false, false, ["fe"], () => {
     return (fe.value/1.15)/200000000;
 });
@@ -32,11 +34,12 @@ let As = new Variable("As", undefined, undefined,true, false, ["Mu", "u1"], () =
     let fsu = fe.value/1.15;
     if(u.value <= Uab || u.value <= u1.value){
         a = 1.25*(1-Math.sqrt(1-2*u.value));
-        z = d*(1-0.4*a);
+        z = d.value*(1-0.4*a);
+        Asc = 0;
         return Mu.value/(z*fsu);
     }else{
-        a = NaN;
-        let esc = ((d-d1)/d)*(3.5+ees.value)-ees.value;
+        a = a1.value;
+        esc = ((d.value-d1.value)/d.value)*(3.5+ees.value)-ees.value;
         let Ssc;
         if(esc <= ees.value){
             Ssc = esc*200000000;
@@ -44,27 +47,26 @@ let As = new Variable("As", undefined, undefined,true, false, ["Mu", "u1"], () =
             Ssc = fsu;
         }
         let Ss = fsu;
-        Asc = (Mu.value - Mr.value)/((d-d1)*Ssc);
-        let z1 = d*(1-0.4*a1.value);
-        return Asc*Ssc/Ss + Mr.value/(z1*Ss);
+        Asc = (Mu.value - Mr.value)/((d.value-d1.value)*Ssc);
+        z = d.value*(1-0.4*a);
+        return Asc*Ssc/Ss + Mr.value/(z*Ss);
     }
 });
 let u = new Variable("u", undefined, undefined,false, false, ["Mu"], () => {
     let fbu = 0.85*fc28.value/1.5;
-    return Mu.value/(b.value*d*d*fbu);
+    return Mu.value/(b.value*d.value*d.value*fbu);
 });
 let Mr = new Variable("Mr", undefined, undefined,false, false, ["b", "h"], () => {
     let fbu = 0.85*fc28.value/1.5;
-    return u1.value*b.value*d*d*fbu;
+    return u1.value*b.value*d.value*d.value*fbu;
 });
-let variables = [Mu, Ms,fc28,fe,ees,a1,u,Mr,u1,b,h,As];
+let variables = [Mu, Ms,fc28,fe,ees,a1,u,Mr,u1,b,h,d,d1,As];
 let changed = true;
 let Uab = 0.187;
 let Asc;
 let eb = 3.5;
 let fiss;
 let n;
-let d,d1;
 let ft28;
 let a;
 let z;
@@ -72,7 +74,9 @@ let val;
 let sigmaB;
 let sigmaS;
 let sigmaSt;
+let esc;
 let Asmin;
+let Asmax;
 
 function refresh(){
     n = +document.getElementById("fe-type").value;
@@ -99,10 +103,6 @@ function refresh(){
         verifyELS();
     }
     details();
-    if(h.value){
-        d = 0.9*h.value;
-        d1 = 0.1*h.value;
-    }
 }
 
 function checkCalc(){
@@ -169,25 +169,28 @@ function AsLimits(){
     }else{
         ft28 = 0.275*Math.pow(fc28.value/1000000,2/3)*1000000;
     }
-    let min2 = 0.23*b.value*d*ft28/fe.value;
+    let min2 = 0.23*b.value*d.value*ft28/fe.value;
     Asmin = Math.max(min1, min2);
+    Asmax = 0.05*b.value*h.value;
     let error = document.getElementById("As-error");
     error.innerText = "";
-    if (As.value < Asmin){
-        error.innerText = "As < Asmin = " + Asmin / As.unit;
-    }
+    if (As.value + Asc < Asmin){ error.innerText = "As < Asmin = " + Asmin / As.unit;}
+    if (As.value + Asc > Asmax){ error.innerText = "As > Asmax = " + Asmax / As.unit;}
 }
 
 function details(){
     document.getElementById("Asmin-detail").innerText = Math.round(Asmin*100000)/10;
-    document.getElementById("d-detail").innerText = Math.round(d*10000000)/100000;
-    document.getElementById("d1-detail").innerText = Math.round(d1*10000000)/100000;
+    document.getElementById("Asmax-detail").innerText = Math.round(Asmax*100000)/10;
+    document.getElementById("z-detail").innerText = Math.round(z*10000000)/100000;
+    document.getElementById("yan-detail").innerText = Math.round(x*10000000)/100000;
+    document.getElementById("I-detail").innerText = Math.round(I*100000000000)/1000;
     document.getElementById("U-detail").innerText = Math.round(u.value*10000000)/10000000;
     document.getElementById("U1-detail").innerText = Math.round(u1.value*10000000)/10000000;
     document.getElementById("a-detail").innerText = Math.round(a*10000)/10000;
     document.getElementById("a1-detail").innerText = Math.round(a1.value*10000)/10000;
     document.getElementById("Asc-detail").innerText = Math.round(Asc*10000000)/1000;
-    document.getElementById("ees-detail").innerText = Math.round(ees.value*10000)/10000000;
+    document.getElementById("ees-detail").innerText = Math.round(ees.value*10000)/10000;
+    document.getElementById("esc-detail").innerText = Math.round(esc*10000)/10000;
     document.getElementById("Mr-detail").innerText = Math.round(Mr.value*10)/10000;
     document.getElementById("ft28-detail").innerText = Math.round(ft28)/1000000;
     document.getElementById("Sst-detail").innerText = Math.round(sigmaS)/1000000;
@@ -196,11 +199,12 @@ function details(){
     document.getElementById("Sbr-detail").innerText = Math.round(0.6*fc28.value)/1000000;
 }
 let x;
+let I;
 function verifyELS(){
     let asc = Asc ? Asc : 0;
     let ax = b.value/2;
     let bx = 15*asc + 15*As.value;
-    let cx = -15*(asc*d1 + As.value * d);
+    let cx = -15*(asc*d1.value + As.value * d.value);
     let delta = bx*bx - 4*ax*cx;
     let x1,x2;
     if (delta == 0){
@@ -212,9 +216,9 @@ function verifyELS(){
         if (x2 < 0 || x2 > h.value){x2=0;}
         x = x1+x2;
     }
-    let I = b.value*Math.pow(x,3)/3 + 15*asc*(x-d1)*(x-d1) + 15 * As.value*(d-x)*(d-x);
+    I = b.value*Math.pow(x,3)/3 + 15*asc*(x-d1.value)*(x-d1.value) + 15 * As.value*(d.value-x)*(d.value-x);
     sigmaB = Ms.value*x/I;
-    sigmaS = 15*Ms.value*(d-x)/I;
+    sigmaS = 15*Ms.value*(d.value-x)/I;
     sigmaSt = 1000000*Math.min(2*fe.value/3000000, Math.max(0.5*fe.value/1000000, 110*Math.sqrt(n*ft28/1000000)));
     if(fiss == 3){
         sigmaSt *= 0.8;

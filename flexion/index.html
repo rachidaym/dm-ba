@@ -1,167 +1,196 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BA</title>
-        <link rel="stylesheet" href="../style2.css" type="text/css">
-        <script src="script.js"></script>
-    </head>
-    <body>
-        <h1>Flexion Simple</h1>
-        <div class="variable">
-            <span>M<sub>u</sub></span>
-            <input id="Mu" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="Mu-unit" onchange="unitChange(this.id)">
-                <option value="1">N.m</option>
-                <option value="1000" selected="selected">KN.m</option>
-                <option value="1000000">MN.m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>M<sub>s</sub></span>
-            <input id="Ms" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="Ms-unit" onchange="unitChange(this.id)">
-                <option value="1">N.m</option>
-                <option value="1000" selected="selected">KN.m</option>
-                <option value="1000000">MN.m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>f<sub>c28</sub></span> 
-            <input id="fc28" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="fc28-unit" onchange="unitChange(this.id)">
-                <option value="1">Pa</option>
-                <option value="1000">KPa</option>
-                <option value="1000000" selected="selected">MPa</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>f<sub>e</sub></span>
-            <input id="fe" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="fe-unit" onchange="unitChange(this.id)">
-                <option value="1">Pa</option>
-                <option value="1000">KPa</option>
-                <option value="1000000" selected="selected">MPa</option>
-            </select>
-            <select id="fe-type" onchange="refresh()">
-                <option value="1">RL</option>
-                <option value="1.6">HA</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>Fissuration</span>
-            <select id="fiss" onchange="refresh()">
-                <option value="1">Fissuration peu préjudiciable</option>
-                <option value="2">Fissuration préjudiciable</option>
-                <option value="3">Fissuration tres préjudiciable</option>
-            </select>
-        </div>
-        <div class="variable">
-            <span>b</span> 
-            <input id="b" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="b-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>h </span>
-            <input id="h" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="h-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>A<sub>st</sub></span> 
-            <input id="As" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="As-unit" onchange="unitChange(this.id)">
-                <option value="0.000001">mm²</option>
-                <option value="0.0001">cm²</option>
-                <option value="1" selected="selected">m²</option>
-            </select>
-            <button id="As-button" onclick="calculateClick(this.id)">Calculer</button>
-            </div>
-        </div>
-        <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
-        <br><br>
-        <h2>Details:</h3>
-        <div id="details" class="details">
-            <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
-            <span>d</span>: <span id="d-detail"></span><span>cm</span><br>
-            <span>d`</span>: <span id="d1-detail"></span><span>cm</span><br>
-            <span>α</span>: <span id="a-detail"></span><br>
-            <span>α<sub>1</sub></span>: <span id="a1-detail"></span><br>
-            <span>μ</span>: <span id="U-detail"></span><br>
-            <span>μ<sub>1</sub></span>: <span id="U1-detail"></span><br>
-            <span>ε<sub>es</sub></span>: <span id="ees-detail"></span><br>
-            <span>M<sub>R</sub></span>: <span id="Mr-detail"></span><span>KN.m</span><br>
-            <span>A<sub>sc</sub></span>: <span id="Asc-detail"></span><span>cm²</span><br>
-            <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>    
-            <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
-            <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
-            <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
-            <span>σ̅<sub>st</sub></span>: <span id="Sstr-detail"></span><span>MPa</span><br>
 
-        </div>
-        <script>
-        refresh();
-        </script>
-        <script>
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            if (currentTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-        
-            function toggleDarkMode() {
-                document.body.classList.toggle('dark-mode');
-                const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-                localStorage.setItem('theme', newTheme);
-            }
-        
-            const darkModeButton = document.createElement('button');
-            darkModeButton.innerHTML = '🌙'; 
-            darkModeButton.style.position = 'fixed';
-            darkModeButton.style.top = '20px'; 
-            darkModeButton.style.right = '20px';
-            darkModeButton.style.padding = '8px'; 
-            darkModeButton.style.fontSize = '1.2rem'; 
-            darkModeButton.style.backgroundColor = '#004d7a'; 
-            darkModeButton.style.color = '#fff'; 
-            darkModeButton.style.border = 'none';
-            darkModeButton.style.borderRadius = '50%';
-            darkModeButton.style.cursor = 'pointer';
-            darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
-            darkModeButton.style.transition = 'background-color 0.3s';
-            darkModeButton.style.zIndex = '9999'; 
-            darkModeButton.style.width = '40px';  
-            darkModeButton.style.height = '40px'; 
-        
-            darkModeButton.addEventListener('mouseover', () => {
-                darkModeButton.style.backgroundColor = '#1e90ff';
-            });
-            darkModeButton.addEventListener('mouseout', () => {
-                darkModeButton.style.backgroundColor = '#004d7a';
-            });
-        
-            darkModeButton.addEventListener('click', toggleDarkMode);
-            document.body.appendChild(darkModeButton);
-        </script>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BA</title>
+  <link rel="stylesheet" href="../style2.css" type="text/css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <h1>Flexion Simple</h1>
+  <div class="variable">
+    <span>M<sub>u</sub></span>
+    <input id="Mu" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="Mu-unit" onchange="unitChange(this.id)">
+        <option value="1">N.m</option>
+        <option value="1000" selected="selected">KN.m</option>
+        <option value="1000000">MN.m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>M<sub>s</sub></span>
+    <input id="Ms" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="Ms-unit" onchange="unitChange(this.id)">
+        <option value="1">N.m</option>
+        <option value="1000" selected="selected">KN.m</option>
+        <option value="1000000">MN.m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>f<sub>c28</sub></span>
+    <input id="fc28" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="fc28-unit" onchange="unitChange(this.id)">
+        <option value="1">Pa</option>
+        <option value="1000">KPa</option>
+        <option value="1000000" selected="selected">MPa</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>f<sub>e</sub></span>
+    <input id="fe" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="fe-unit" onchange="unitChange(this.id)">
+        <option value="1">Pa</option>
+        <option value="1000">KPa</option>
+        <option value="1000000" selected="selected">MPa</option>
+      </select>
+      <select id="fe-type" onchange="refresh()">
+        <option value="1">RL</option>
+        <option value="1.6">HA</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>Fissuration</span>
+    <select id="fiss" onchange="refresh()">
+      <option value="1">Fissuration peu préjudiciable</option>
+      <option value="2">Fissuration préjudiciable</option>
+      <option value="3">Fissuration tres préjudiciable</option>
+    </select>
+  </div>
+  <div class="variable">
+    <span>b</span>
+    <input id="b" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="b-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>h </span>
+    <input id="h" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="h-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>d </span>
+    <input id="d" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="d-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>d' </span>
+    <input id="d1" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="d1-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>A<sub>st</sub></span>
+    <input id="As" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="As-unit" onchange="unitChange(this.id)">
+        <option value="0.000001">mm²</option>
+        <option value="0.0001">cm²</option>
+        <option value="1" selected="selected">m²</option>
+      </select>
+      <button id="As-button" onclick="calculateClick(this.id)">Calculer</button>
+    </div>
+  </div>
+  <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
+  <br><br>
+  <h2>Details:</h3>
+    <div id="details" class="details">
+      <span>A<sub>sc</sub></span>: <span id="Asc-detail"></span><span>cm²</span><br>
+      <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
+      <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
+      <span>α</span>: <span id="a-detail"></span><br>
+      <span>α<sub>1</sub></span>: <span id="a1-detail"></span><br>
+      <span>z</span>: <span id="z-detail"></span><span>cm</span><br>
+      <span>μ</span>: <span id="U-detail"></span><br>
+      <span>μ<sub>1</sub></span>: <span id="U1-detail"></span><br>
+      <span>ε<sub>es</sub></span>: <span id="ees-detail"></span><span>‰</span><br>
+      <span>ε<sub>sc</sub></span>: <span id="esc-detail"></span><span>‰</span><br>
+      <span>M<sub>R</sub></span>: <span id="Mr-detail"></span><span>KN.m</span><br>
+      <span style="color: var(--label-color);">ELS:</span><br>
+      <span>y (A.N)</span>: <span id="yan-detail"></span><span>cm</span><br>
+      <span>I</span>: <span id="I-detail"></span><span>cm<sup>4</sup></span><br>
+      <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
+      <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
+      <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
+      <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
+      <span>σ̅<sub>st</sub></span>: <span id="Sstr-detail"></span><span>MPa</span><br>
+
+    </div>
+    <script>
+      refresh();
+    </script>
+    <script>
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+
+      function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+      }
+
+      const darkModeButton = document.createElement('button');
+      darkModeButton.innerHTML = '🌙';
+      darkModeButton.style.position = 'fixed';
+      darkModeButton.style.top = '20px';
+      darkModeButton.style.right = '20px';
+      darkModeButton.style.padding = '8px';
+      darkModeButton.style.fontSize = '1.2rem';
+      darkModeButton.style.backgroundColor = '#004d7a';
+      darkModeButton.style.color = '#fff';
+      darkModeButton.style.border = 'none';
+      darkModeButton.style.borderRadius = '50%';
+      darkModeButton.style.cursor = 'pointer';
+      darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+      darkModeButton.style.transition = 'background-color 0.3s';
+      darkModeButton.style.zIndex = '9999';
+      darkModeButton.style.width = '40px';
+      darkModeButton.style.height = '40px';
+
+      darkModeButton.addEventListener('mouseover', () => {
+        darkModeButton.style.backgroundColor = '#1e90ff';
+      });
+      darkModeButton.addEventListener('mouseout', () => {
+        darkModeButton.style.backgroundColor = '#004d7a';
+      });
+
+      darkModeButton.addEventListener('click', toggleDarkMode);
+      document.body.appendChild(darkModeButton);
+    </script>
+</body>
+
 </html>

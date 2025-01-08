@@ -1,194 +1,198 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BA</title>
-        <link rel="stylesheet" href="../style2.css" type="text/css">
-        <script src="script.js"></script>
-    </head>
-    <body>
-        <h1>Compression</h1>
-        <div class="variable">
-            <span>N<sub>u</sub></span>
-            <input id="Nu" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="Nu-unit" onchange="unitChange(this.id)">
-                <option value="1">N</option>
-                <option value="1000" selected="selected">KN</option>
-                <option value="1000000">MN</option>
-            </select>
-            <button id="Nu-button" onclick="calculateClick(this.id)">Calculer</button>
-            </div>
-        </div>
-        <div class="variable">
-            <span>N<sub>serr</sub></span>
-            <input id="Nserr" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="Nserr-unit" onchange="unitChange(this.id)">
-                <option value="1">N</option>
-                <option value="1000" selected="selected">KN</option>
-                <option value="1000000">MN</option>
-            </select>
-            <button id="Nserr-button" onclick="calculateClick(this.id)">Calculer</button>
-            </div>
-        </div>
-        <div class="variable">
-            <span>f<sub>c28</sub></span> 
-            <input id="fc28" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="fc28-unit" onchange="unitChange(this.id)">
-                <option value="1">Pa</option>
-                <option value="1000">KPa</option>
-                <option value="1000000" selected="selected">MPa</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>f<sub>e</sub></span>
-            <input id="fe" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="fe-unit" onchange="unitChange(this.id)">
-                <option value="1">Pa</option>
-                <option value="1000">KPa</option>
-                <option value="1000000" selected="selected">MPa</option>
-            </select>
-            <select id="fe-type" onchange="refresh()">
-                <option value="1">RL</option>
-                <option value="1.6">HA</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>Fissuration</span>
-            <select id="fiss" onchange="refresh()">
-                <option value="1">Fissuration peu préjudiciable</option>
-                <option value="2">Fissuration préjudiciable</option>
-                <option value="3">Fissuration tres préjudiciable</option>
-            </select>
-        </div>
-        <div class="variable">
-            <span>Section</span> 
-            <select id="shape" onchange="refresh()">
-                <option value="rect" selected="selected">Rectangulaire</option>
-                <option value="circ">Circulaire</option>
-            </select>
-        </div>
-        <div class="variable">
-            <span>r </span>
-            <input id="r" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="r-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>a</span> 
-            <input id="a" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="a-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>b </span>
-            <input id="b" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="b-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>L<sub>f</sub></span>
-            <input id="lf" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="lf-unit" onchange="unitChange(this.id)">
-                <option value="0.001">mm</option>
-                <option value="0.01">cm</option>
-                <option value="1" selected="selected">m</option>
-            </select>
-            </div>
-        </div>
-        <div class="variable">
-            <span>A<sub>s</sub></span> 
-            <input id="As" type="text" oninput="refresh()">
-            <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
-            <select id="As-unit" onchange="unitChange(this.id)">
-                <option value="0.000001">mm²</option>
-                <option value="0.0001">cm²</option>
-                <option value="1" selected="selected">m²</option>
-            </select>
-            <button id="As-button" onclick="calculateClick(this.id)">Calculer</button>
-            </div>
-        </div>
-        <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
-        <br><br>
-        <h2>Details:</h2>
-        <div id="details" class="details">
-            <span>λ:</span> <span id="lambda-detail"></span><br>
-            <span>β:</span> <span id="beta-detail"></span><br>
-            <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
-            <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
-            <span>A<sub>b</sub></span>: <span id="Ab-detail"></span><span>cm²</span><br>
-            <span>A<sub>br</sub></span>: <span id="Abr-detail"></span> <span>cm²</span><br>
-            <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
-            <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
-            <span>σ<sub>s</sub></span>: <span id="Ss-detail"></span><span>MPa</span><br>
-            <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
-            <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
-        </div>
-        <script>
-        initialize();
-        refresh();
-        </script>
-        <script>
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            if (currentTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-        
-            function toggleDarkMode() {
-                document.body.classList.toggle('dark-mode');
-                const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-                localStorage.setItem('theme', newTheme);
-            }
-        
-            const darkModeButton = document.createElement('button');
-            darkModeButton.innerHTML = '🌙'; 
-            darkModeButton.style.position = 'fixed';
-            darkModeButton.style.top = '20px'; 
-            darkModeButton.style.right = '20px';
-            darkModeButton.style.padding = '8px'; 
-            darkModeButton.style.fontSize = '1.2rem'; 
-            darkModeButton.style.backgroundColor = '#004d7a'; 
-            darkModeButton.style.color = '#fff'; 
-            darkModeButton.style.border = 'none';
-            darkModeButton.style.borderRadius = '50%';
-            darkModeButton.style.cursor = 'pointer';
-            darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
-            darkModeButton.style.transition = 'background-color 0.3s';
-            darkModeButton.style.zIndex = '9999'; 
-            darkModeButton.style.width = '40px';  
-            darkModeButton.style.height = '40px'; 
-        
-            darkModeButton.addEventListener('mouseover', () => {
-                darkModeButton.style.backgroundColor = '#1e90ff';
-            });
-            darkModeButton.addEventListener('mouseout', () => {
-                darkModeButton.style.backgroundColor = '#004d7a';
-            });
-        
-            darkModeButton.addEventListener('click', toggleDarkMode);
-            document.body.appendChild(darkModeButton);
-        </script> 
-    </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BA</title>
+  <link rel="stylesheet" href="../style2.css" type="text/css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <h1>Compression</h1>
+  <div class="variable">
+    <span>N<sub>u</sub></span>
+    <input id="Nu" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="Nu-unit" onchange="unitChange(this.id)">
+        <option value="1">N</option>
+        <option value="1000" selected="selected">KN</option>
+        <option value="1000000">MN</option>
+      </select>
+      <button id="Nu-button" onclick="calculateClick(this.id)">Calculer</button>
+    </div>
+  </div>
+  <div class="variable">
+    <span>N<sub>serr</sub></span>
+    <input id="Nserr" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="Nserr-unit" onchange="unitChange(this.id)">
+        <option value="1">N</option>
+        <option value="1000" selected="selected">KN</option>
+        <option value="1000000">MN</option>
+      </select>
+      <button id="Nserr-button" onclick="calculateClick(this.id)">Calculer</button>
+    </div>
+  </div>
+  <div class="variable">
+    <span>f<sub>c28</sub></span>
+    <input id="fc28" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="fc28-unit" onchange="unitChange(this.id)">
+        <option value="1">Pa</option>
+        <option value="1000">KPa</option>
+        <option value="1000000" selected="selected">MPa</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>f<sub>e</sub></span>
+    <input id="fe" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="fe-unit" onchange="unitChange(this.id)">
+        <option value="1">Pa</option>
+        <option value="1000">KPa</option>
+        <option value="1000000" selected="selected">MPa</option>
+      </select>
+      <select id="fe-type" onchange="refresh()">
+        <option value="1">RL</option>
+        <option value="1.6">HA</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>Fissuration</span>
+    <select id="fiss" onchange="refresh()">
+      <option value="1">Fissuration peu préjudiciable</option>
+      <option value="2">Fissuration préjudiciable</option>
+      <option value="3">Fissuration tres préjudiciable</option>
+    </select>
+  </div>
+  <div class="variable">
+    <span>Section</span>
+    <select id="shape" onchange="refresh()">
+      <option value="rect" selected="selected">Rectangulaire</option>
+      <option value="circ">Circulaire</option>
+    </select>
+  </div>
+  <div class="variable">
+    <span>r </span>
+    <input id="r" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="r-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>a</span>
+    <input id="a" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="a-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>b </span>
+    <input id="b" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="b-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>L<sub>f</sub></span>
+    <input id="lf" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="lf-unit" onchange="unitChange(this.id)">
+        <option value="0.001">mm</option>
+        <option value="0.01">cm</option>
+        <option value="1" selected="selected">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="variable">
+    <span>A<sub>s</sub></span>
+    <input id="As" type="text" oninput="refresh()">
+    <div style="display: flex; flex-direction:row; width: 100%;gap:1em">
+      <select id="As-unit" onchange="unitChange(this.id)">
+        <option value="0.000001">mm²</option>
+        <option value="0.0001">cm²</option>
+        <option value="1" selected="selected">m²</option>
+      </select>
+      <button id="As-button" onclick="calculateClick(this.id)">Calculer</button>
+    </div>
+  </div>
+  <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
+  <br><br>
+  <h2>Details:</h2>
+  <div id="details" class="details">
+    <span>λ:</span> <span id="lambda-detail"></span><br>
+    <span>β:</span> <span id="beta-detail"></span><br>
+    <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
+    <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
+    <span>A<sub>b</sub></span>: <span id="Ab-detail"></span><span>cm²</span><br>
+    <span>A<sub>br</sub></span>: <span id="Abr-detail"></span> <span>cm²</span><br>
+    <span style="color: var(--label-color);">ELS:</span><br>
+    <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
+    <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
+    <span>σ<sub>s</sub></span>: <span id="Ss-detail"></span><span>MPa</span><br>
+    <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
+    <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
+  </div>
+  <script>
+    initialize();
+    refresh();
+  </script>
+  <script>
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+    }
+
+    const darkModeButton = document.createElement('button');
+    darkModeButton.innerHTML = '🌙';
+    darkModeButton.style.position = 'fixed';
+    darkModeButton.style.top = '20px';
+    darkModeButton.style.right = '20px';
+    darkModeButton.style.padding = '8px';
+    darkModeButton.style.fontSize = '1.2rem';
+    darkModeButton.style.backgroundColor = '#004d7a';
+    darkModeButton.style.color = '#fff';
+    darkModeButton.style.border = 'none';
+    darkModeButton.style.borderRadius = '50%';
+    darkModeButton.style.cursor = 'pointer';
+    darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+    darkModeButton.style.transition = 'background-color 0.3s';
+    darkModeButton.style.zIndex = '9999';
+    darkModeButton.style.width = '40px';
+    darkModeButton.style.height = '40px';
+
+    darkModeButton.addEventListener('mouseover', () => {
+      darkModeButton.style.backgroundColor = '#1e90ff';
+    });
+    darkModeButton.addEventListener('mouseout', () => {
+      darkModeButton.style.backgroundColor = '#004d7a';
+    });
+
+    darkModeButton.addEventListener('click', toggleDarkMode);
+    document.body.appendChild(darkModeButton);
+  </script>
+</body>
+
 </html>
