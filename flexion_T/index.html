@@ -160,76 +160,76 @@
   </div>
   <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
   <br><br>
-  <h2>Details:</h3>
-    <div id="details" class="details">
-      <!-- <span>A<sub>sc</sub></span>: <span id="Asc-detail"></span><span>cm²</span><br> -->
-      <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
-      <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
-      <span>A<sub>s1</sub></span>: <span id="As1-detail"></span><span>cm²</span><br>
-      <span>A<sub>s2</sub></span>: <span id="As2-detail"></span><span>cm²</span><br>
-      <span>α</span>: <span id="a-detail"></span><br>
-      <span>α<sub>1</sub></span>: <span id="a1-detail"></span><br>
-      <span>z</span>: <span id="z-detail"></span><span>cm</span><br>
-      <span>μ</span>: <span id="U-detail"></span><br>
-      <span>μ<sub>1</sub></span>: <span id="U1-detail"></span><br>
-      <span>ε<sub>es</sub></span>: <span id="ees-detail"></span><span>‰</span><br>
-      <span>ε<sub>sc</sub></span>: <span id="esc-detail"></span><span>‰</span><br>
-      <span>M<sub>R</sub></span>: <span id="Mr-detail"></span><span>KN.m</span><br>
-      <span>M<sub>t</sub></span>: <span id="Mt-detail"></span><span>KN.m</span><br>
-      <span>M<sub>d</sub></span>: <span id="Md-detail"></span><span>KN.m</span><br>
-      <span style="color: var(--label-color);">ELS:</span><br>
-      <span>x (A.N)</span>: <span id="xan-detail"></span><span>cm</span><br>
-      <span>I</span>: <span id="I-detail"></span><span>cm<sup>4</sup></span><br>
-      <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
-      <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
-      <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
-      <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
-      <span>σ̅<sub>st</sub></span>: <span id="Sstr-detail"></span><span>MPa</span><br>
+  <h2>Details:</h2>
+  <div id="details" class="details">
+    <!-- <span>A<sub>sc</sub></span>: <span id="Asc-detail"></span><span>cm²</span><br> -->
+    <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
+    <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
+    <span>A<sub>s1</sub></span>: <span id="As1-detail"></span><span>cm²</span><br>
+    <span>A<sub>s2</sub></span>: <span id="As2-detail"></span><span>cm²</span><br>
+    <span>α</span>: <span id="a-detail"></span><br>
+    <span>α<sub>1</sub></span>: <span id="a1-detail"></span><br>
+    <span>z</span>: <span id="z-detail"></span><span>cm</span><br>
+    <span>μ</span>: <span id="U-detail"></span><br>
+    <span>μ<sub>1</sub></span>: <span id="U1-detail"></span><br>
+    <span>ε<sub>es</sub></span>: <span id="ees-detail"></span><span>‰</span><br>
+    <span>ε<sub>sc</sub></span>: <span id="esc-detail"></span><span>‰</span><br>
+    <span>M<sub>R</sub></span>: <span id="Mr-detail"></span><span>KN.m</span><br>
+    <span>M<sub>t</sub></span>: <span id="Mt-detail"></span><span>KN.m</span><br>
+    <span>M<sub>d</sub></span>: <span id="Md-detail"></span><span>KN.m</span><br>
+    <span style="color: var(--label-color);">ELS:</span><br>
+    <span>x (A.N)</span>: <span id="xan-detail"></span><span>cm</span><br>
+    <span>I</span>: <span id="I-detail"></span><span>cm<sup>4</sup></span><br>
+    <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
+    <span>σ<sub>b</sub></span>: <span id="Sb-detail"></span><span>MPa</span><br>
+    <span>σ̅<sub>b</sub></span>: <span id="Sbr-detail"></span><span>MPa</span><br>
+    <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
+    <span>σ̅<sub>st</sub></span>: <span id="Sstr-detail"></span><span>MPa</span><br>
 
-    </div>
-    <script>
-      refresh();
-    </script>
-    <script>
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-      }
+  </div>
+  <script>
+    refresh();
+  </script>
+  <script>
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
 
-      function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-      }
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+    }
 
-      const darkModeButton = document.createElement('button');
-      darkModeButton.innerHTML = '🌙';
-      darkModeButton.style.position = 'fixed';
-      darkModeButton.style.top = '20px';
-      darkModeButton.style.right = '20px';
-      darkModeButton.style.padding = '8px';
-      darkModeButton.style.fontSize = '1.2rem';
+    const darkModeButton = document.createElement('button');
+    darkModeButton.innerHTML = '🌙';
+    darkModeButton.style.position = 'fixed';
+    darkModeButton.style.top = '20px';
+    darkModeButton.style.right = '20px';
+    darkModeButton.style.padding = '8px';
+    darkModeButton.style.fontSize = '1.2rem';
+    darkModeButton.style.backgroundColor = '#004d7a';
+    darkModeButton.style.color = '#fff';
+    darkModeButton.style.border = 'none';
+    darkModeButton.style.borderRadius = '50%';
+    darkModeButton.style.cursor = 'pointer';
+    darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+    darkModeButton.style.transition = 'background-color 0.3s';
+    darkModeButton.style.zIndex = '9999';
+    darkModeButton.style.width = '40px';
+    darkModeButton.style.height = '40px';
+
+    darkModeButton.addEventListener('mouseover', () => {
+      darkModeButton.style.backgroundColor = '#1e90ff';
+    });
+    darkModeButton.addEventListener('mouseout', () => {
       darkModeButton.style.backgroundColor = '#004d7a';
-      darkModeButton.style.color = '#fff';
-      darkModeButton.style.border = 'none';
-      darkModeButton.style.borderRadius = '50%';
-      darkModeButton.style.cursor = 'pointer';
-      darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
-      darkModeButton.style.transition = 'background-color 0.3s';
-      darkModeButton.style.zIndex = '9999';
-      darkModeButton.style.width = '40px';
-      darkModeButton.style.height = '40px';
+    });
 
-      darkModeButton.addEventListener('mouseover', () => {
-        darkModeButton.style.backgroundColor = '#1e90ff';
-      });
-      darkModeButton.addEventListener('mouseout', () => {
-        darkModeButton.style.backgroundColor = '#004d7a';
-      });
-
-      darkModeButton.addEventListener('click', toggleDarkMode);
-      document.body.appendChild(darkModeButton);
-    </script>
+    darkModeButton.addEventListener('click', toggleDarkMode);
+    document.body.appendChild(darkModeButton);
+  </script>
 </body>
 
 </html>

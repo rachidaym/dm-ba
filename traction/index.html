@@ -121,61 +121,61 @@
   </div>
   <span style="border-style:none;margin:auto;padding: 0 0.5em 0 0.5em;" id="As-error"></span>
   <br><br>
-  <h2>Details:</h3>
-    <div id="details" class="details">
-      <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
-      <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
-      <span>A<sub>b</sub></span>: <span id="Ab-detail"></span><span>cm²</span><br>
-      <span>A<sub>su</sub></span>: <span id="Asu-detail"></span><span>cm²</span><br>
-      <span>A<sub>sser</sub></span>: <span id="Asser-detail"></span><span>cm²</span><br>
-      <span>A<sub>sb</sub></span>: <span id="Asb-detail"></span><span>cm²</span><br>
-      <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
-      <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
-    </div>
-    <script>
-      initialize();
-      refresh();
-    </script>
-    <script>
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-      }
+  <h2>Details:</h2>
+  <div id="details" class="details">
+    <span>A<sub>s<sub>min</sub></sub></span>: <span id="Asmin-detail"></span><span>cm²</span><br>
+    <span>A<sub>s<sub>max</sub></sub></span>: <span id="Asmax-detail"></span><span>cm²</span><br>
+    <span>A<sub>b</sub></span>: <span id="Ab-detail"></span><span>cm²</span><br>
+    <span>A<sub>su</sub></span>: <span id="Asu-detail"></span><span>cm²</span><br>
+    <span>A<sub>sser</sub></span>: <span id="Asser-detail"></span><span>cm²</span><br>
+    <span>A<sub>sb</sub></span>: <span id="Asb-detail"></span><span>cm²</span><br>
+    <span>f<sub>t28</sub></span>: <span id="ft28-detail"></span><span>MPa</span><br>
+    <span>σ<sub>st</sub></span>: <span id="Sst-detail"></span><span>MPa</span><br>
+  </div>
+  <script>
+    initialize();
+    refresh();
+  </script>
+  <script>
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
 
-      function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-      }
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+    }
 
-      const darkModeButton = document.createElement('button');
-      darkModeButton.innerHTML = '🌙';
-      darkModeButton.style.position = 'fixed';
-      darkModeButton.style.top = '20px';
-      darkModeButton.style.right = '20px';
-      darkModeButton.style.padding = '8px';
-      darkModeButton.style.fontSize = '1.2rem';
+    const darkModeButton = document.createElement('button');
+    darkModeButton.innerHTML = '🌙';
+    darkModeButton.style.position = 'fixed';
+    darkModeButton.style.top = '20px';
+    darkModeButton.style.right = '20px';
+    darkModeButton.style.padding = '8px';
+    darkModeButton.style.fontSize = '1.2rem';
+    darkModeButton.style.backgroundColor = '#004d7a';
+    darkModeButton.style.color = '#fff';
+    darkModeButton.style.border = 'none';
+    darkModeButton.style.borderRadius = '50%';
+    darkModeButton.style.cursor = 'pointer';
+    darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
+    darkModeButton.style.transition = 'background-color 0.3s';
+    darkModeButton.style.zIndex = '9999';
+    darkModeButton.style.width = '40px';
+    darkModeButton.style.height = '40px';
+
+    darkModeButton.addEventListener('mouseover', () => {
+      darkModeButton.style.backgroundColor = '#1e90ff';
+    });
+    darkModeButton.addEventListener('mouseout', () => {
       darkModeButton.style.backgroundColor = '#004d7a';
-      darkModeButton.style.color = '#fff';
-      darkModeButton.style.border = 'none';
-      darkModeButton.style.borderRadius = '50%';
-      darkModeButton.style.cursor = 'pointer';
-      darkModeButton.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)';
-      darkModeButton.style.transition = 'background-color 0.3s';
-      darkModeButton.style.zIndex = '9999';
-      darkModeButton.style.width = '40px';
-      darkModeButton.style.height = '40px';
+    });
 
-      darkModeButton.addEventListener('mouseover', () => {
-        darkModeButton.style.backgroundColor = '#1e90ff';
-      });
-      darkModeButton.addEventListener('mouseout', () => {
-        darkModeButton.style.backgroundColor = '#004d7a';
-      });
-
-      darkModeButton.addEventListener('click', toggleDarkMode);
-      document.body.appendChild(darkModeButton);
-    </script>
+    darkModeButton.addEventListener('click', toggleDarkMode);
+    document.body.appendChild(darkModeButton);
+  </script>
 </body>
 
 </html>
