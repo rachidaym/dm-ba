@@ -19,8 +19,8 @@ let fc28 = new Variable("fc28", undefined, undefined,true, false, ["never"], und
 let fe = new Variable("fe", undefined, undefined,true, false, ["never"], undefined);
 let b = new Variable("b", undefined, undefined,true, false, ["never"], undefined);
 let h = new Variable("h", undefined, undefined,true, false, ["never"], undefined);
-let d = new Variable("d", undefined, undefined,true, false, ["never"], undefined);
-let d1 = new Variable("d1", undefined, undefined,true, false, ["never"], undefined);
+let d = new Variable("d", undefined, undefined,true, false, ["h"], () => {return 0.9*h.value;});
+let d1 = new Variable("d1", undefined, undefined,true, false, ["h"], () => {return 0.1*h.value});
 let ees = new Variable("ees", undefined, undefined,false, false, ["fe"], () => {
     return (fe.value/1.15)/200000000;
 });
@@ -63,7 +63,7 @@ let Mr = new Variable("Mr", undefined, undefined,false, false, ["b", "h"], () =>
 let variables = [Mu, Ms,fc28,fe,ees,a1,u,Mr,u1,b,h,d,d1,As];
 let changed = true;
 let Uab = 0.187;
-let Asc;
+let Asc=0;
 let eb = 3.5;
 let fiss;
 let n;
@@ -179,19 +179,20 @@ function AsLimits(){
 }
 
 function details(){
-    document.getElementById("Asmin-detail").innerText = Math.round(Asmin*100000)/10;
-    document.getElementById("Asmax-detail").innerText = Math.round(Asmax*100000)/10;
+    document.getElementById("Asmin-detail").innerText = Math.round(Asmin*1000000000)/100000;
+    document.getElementById("Asmax-detail").innerText = Math.round(Asmax*1000000000)/100000;
     document.getElementById("z-detail").innerText = Math.round(z*10000000)/100000;
-    document.getElementById("yan-detail").innerText = Math.round(x*10000000)/100000;
+    document.getElementById("xan-detail").innerText = Math.round(x*10000000)/100000;
     document.getElementById("I-detail").innerText = Math.round(I*100000000000)/1000;
     document.getElementById("U-detail").innerText = Math.round(u.value*10000000)/10000000;
     document.getElementById("U1-detail").innerText = Math.round(u1.value*10000000)/10000000;
-    document.getElementById("a-detail").innerText = Math.round(a*10000)/10000;
-    document.getElementById("a1-detail").innerText = Math.round(a1.value*10000)/10000;
-    document.getElementById("Asc-detail").innerText = Math.round(Asc*10000000)/1000;
+    document.getElementById("a-detail").innerText = Math.round(a*100000000)/100000000;
+    document.getElementById("a1-detail").innerText = Math.round(a1.value*100000000)/100000000;
+    //document.getElementById("Asc-detail").innerText = Math.round(Asc*10000000)/1000;
+    document.getElementById("Asc").value = Asc/document.getElementById("Asc-unit").value; 
     document.getElementById("ees-detail").innerText = Math.round(ees.value*10000)/10000;
     document.getElementById("esc-detail").innerText = Math.round(esc*10000)/10000;
-    document.getElementById("Mr-detail").innerText = Math.round(Mr.value*10)/10000;
+    document.getElementById("Mr-detail").innerText = Math.round(Mr.value*100000)/100000000;
     document.getElementById("ft28-detail").innerText = Math.round(ft28)/1000000;
     document.getElementById("Sst-detail").innerText = Math.round(sigmaS)/1000000;
     document.getElementById("Sstr-detail").innerText = Math.round(sigmaSt)/1000000;
