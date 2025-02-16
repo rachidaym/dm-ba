@@ -26,13 +26,11 @@ let Sst = new Variable("Sst", undefined, undefined,false, false, ["fc28", "fe"],
     }else{
         ft28 = 0.275*Math.pow(fc28.value/1000000,2/3)*1000000;
     }
-    let sigmaSt = 1000000*Math.min(2*fe.value/3000000,110*Math.sqrt(n*ft28/1000000));
+    let sigmaSt = 1000000*Math.min(2*fe.value/3000000, Math.max(0.5*fe.value/1000000, 110*Math.sqrt(n*ft28/1000000))); 
     if(fiss === 1){
-        return fe.value/1.15;
+        return fe.value;
     }
-    if(fiss === 3){
-        sigmaSt *= 0.8;
-    }
+    if(fiss === 3){ sigmaSt *= 0.8;}
     return sigmaSt;
 });
 let Asu = new Variable("Asu", undefined, undefined,false, false, ["Nu","fe"], () =>{

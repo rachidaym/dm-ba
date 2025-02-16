@@ -38,7 +38,8 @@ let As = new Variable("As", undefined, undefined,true, false, ["Mu", "u1"], () =
         Asc = 0;
         return Mu.value/(z*fsu);
     }else{
-        a = a1.value;
+        a = NaN;
+        z = NaN;
         esc = ((d.value-d1.value)/d.value)*(3.5+ees.value)-ees.value;
         let Ssc;
         if(esc <= ees.value){
@@ -48,8 +49,7 @@ let As = new Variable("As", undefined, undefined,true, false, ["Mu", "u1"], () =
         }
         let Ss = fsu;
         Asc = (Mu.value - Mr.value)/((d.value-d1.value)*Ssc);
-        z = d.value*(1-0.4*a);
-        return Asc*Ssc/Ss + Mr.value/(z*Ss);
+        return Asc*Ssc/Ss + (0.8*a1.value*b.value*d.value*fbu)/fsu;
     }
 });
 let u = new Variable("u", undefined, undefined,false, false, ["Mu"], () => {
@@ -192,7 +192,7 @@ function details(){
     document.getElementById("Asc").value = Asc/document.getElementById("Asc-unit").value; 
     document.getElementById("ees-detail").innerText = Math.round(ees.value*10000)/10000;
     document.getElementById("esc-detail").innerText = Math.round(esc*10000)/10000;
-    document.getElementById("Mr-detail").innerText = Math.round(Mr.value*100000)/100000000;
+    document.getElementById("Mr-detail").innerText = Math.round(Mr.value*100000)/100000000000;
     document.getElementById("ft28-detail").innerText = Math.round(ft28)/1000000;
     document.getElementById("Sst-detail").innerText = Math.round(sigmaS)/1000000;
     document.getElementById("Sstr-detail").innerText = Math.round(sigmaSt)/1000000;
@@ -225,7 +225,7 @@ function verifyELS(){
         sigmaSt *= 0.8;
     }
     if(fiss == 1){
-        sigmaSt = fe.value/1.15;
+        sigmaSt = fe.value;
     }
     let error = document.getElementById("As-error");
     if (sigmaB > 0.6*fc28.value){

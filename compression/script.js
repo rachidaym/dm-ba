@@ -212,7 +212,7 @@ function verifyELS(){
         return;
     }
     if (fiss == 1){
-        sigmaSt = fe.value/1.15;
+        sigmaSt = fe.value;
         return;
     }
     if(fiss == 3){
