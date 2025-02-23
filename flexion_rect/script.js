@@ -32,6 +32,7 @@ let u1 = new Variable("u1", undefined, undefined,false, false, ["a1"], () => {
 });
 let As = new Variable("As", undefined, undefined,true, false, ["Mu", "u1"], () => {
     let fsu = fe.value/1.15;
+    let fbu = 0.85*fc28.value/1.5;
     if(u.value <= Uab || u.value <= u1.value){
         a = 1.25*(1-Math.sqrt(1-2*u.value));
         z = d.value*(1-0.4*a);
